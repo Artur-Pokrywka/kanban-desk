@@ -6,14 +6,16 @@ function Phone(brand, price, color, displaySize) {
     this.displaySize = displaySize;
 };
 
+Phone.prototype.getWarrantyCost = function() {
+    // var self = this;
+    return this.price * 0.1;
+};
+
+var varantyCost = Phone.prototype.getWarrantyCost();
+
 Phone.prototype.printInfo = function() {
-    var self = this;
-    this.warrantyCost = getWarrantyCost();
-    function getWarrantyCost() {   
-        return self.price * 0.1;
-    }
     console.log("The phone brand is " + this.brand + ", color is " + this.color + " and the price is " + this.price + "$." + 
-    "It has " + this.displaySize + " inches display." + "The extended warranty costs additional " + this.warrantyCost + "$.");
+    "It has " + this.displaySize + " inches display." + "The extended warranty costs additional " + varantyCost + "$.");
 };
 
 var samsungGalaxyS6 = new Phone("Samsung", 1590, "black", 6.2);
