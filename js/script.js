@@ -4,13 +4,14 @@ function Phone(brand, price, color, displaySize) {
 	this.price = price;
     this.color = color;
     this.displaySize = displaySize;
-    this.warrantyCost = getWarrantyCost();
-    function getWarrantyCost() {
-        return price * 0.1;
-    }
 };
 
 Phone.prototype.printInfo = function() {
+    var self = this;
+    this.warrantyCost = getWarrantyCost();
+    function getWarrantyCost() {   
+        return self.price * 0.1;
+    }
     console.log("The phone brand is " + this.brand + ", color is " + this.color + " and the price is " + this.price + "$." + 
     "It has " + this.displaySize + " inches display." + "The extended warranty costs additional " + this.warrantyCost + "$.");
 };
