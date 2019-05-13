@@ -3,16 +3,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // here we will put the code of our application
 
-    function generateTemplate(name, data, basicElement) {
-        var template = document.getElementById(name).innerHTML;
-        var element = document.createElement(basicElement || 'div');
-      
-        Mustache.parse(template);
-        element.innerHTML = Mustache.render(template, data);
-      
-        return element;
-    };
-
     function randomString() {
         var chars = '0123456789abcdefghiklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXTZ';
         var str = '';
@@ -22,13 +12,14 @@ document.addEventListener('DOMContentLoaded', function() {
         return str;
     };
 
-    var board = {
-        name: 'Kanban Board',
-        addColumn: function(column) {
-          this.element.appendChild(column.element);
-          initSortable(column.id); //About this feature we will tell later
-        },
-        element: document.querySelector('#board .column-container')
+    function generateTemplate(name, data, basicElement) {
+        var template = document.getElementById(name).innerHTML;
+        var element = document.createElement(basicElement || 'div');
+      
+        Mustache.parse(template);
+        element.innerHTML = Mustache.render(template, data);
+      
+        return element;
     };
 
     function Column(name) {
@@ -80,19 +71,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function initSortable(id) {
-    var el = document.getElementById(id);
-    var sortable = Sortable.create(el, {
-        group: 'kanban',
-        sort: true
-    });
-    }
-
     document.querySelector('#board .create-column').addEventListener('click', function() {
         var name = prompt('Enter a column name');
         var column = new Column(name);
         board.addColumn(column);
     });
+
+    var board = {
+        name: 'Kanban Board',
+        addColumn: function(column) {
+          this.element.appendChild(column.element);
+          initSortable(column.id); //About this feature we will tell later
+        },
+        element: document.querySelector('#board .column-container')
+    };
+    
+    function initSortable(id) {
+        var el = document.getElementById(id);
+        var sortable = Sortable.create(el, {
+            group: 'kanban',
+            sort: true
+        });
+    }
 
         // CREATING COLUMNS
     var todoColumn = new Column('To do');
