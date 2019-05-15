@@ -2,7 +2,6 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     // here we will put the code of our application
-
     function randomString() {
         var chars = '0123456789abcdefghiklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXTZ';
         var str = '';
@@ -36,9 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
           
             if (event.target.classList.contains('add-card')) {
                var cardName = prompt("Enter the name of the card");  
-                if (cardName == null) {
-                    // console.log("User cancelled the prompt.");
-                } else {
+                if (cardName !== null) {
                     var card = new Card(cardName);
                     self.addCard(card);
                 }
@@ -79,9 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.querySelector('#board .create-column').addEventListener('click', function() {
         var name = prompt('Enter a column name');
-        if (name == null) {
-            // console.log("User cancelled the prompt.");
-        } else {
+        if (name !== null) {
             var column = new Column(name);
             board.addColumn(column);
         }
@@ -105,12 +100,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-        // CREATING COLUMNS
+    // CREATING COLUMNS
     var todoColumn = new Column('To do');
     var doingColumn = new Column('Doing');
     var doneColumn = new Column('Done');
 
-    // ADDING COLUMNS TO THE BOARD
+    // ADDING COLUMNS 
     board.addColumn(todoColumn);
     board.addColumn(doingColumn);
     board.addColumn(doneColumn);
@@ -119,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var card1 = new Card('New task');
     var card2 = new Card('Create kanban boards');
 
-    // ADDING CARDS TO COLUMNS
+    // ADDING CARDS 
     todoColumn.addCard(card1);
     doingColumn.addCard(card2);
 
