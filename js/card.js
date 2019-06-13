@@ -1,7 +1,6 @@
 // KLASA KANBAN CARD
 function Card(id, name) {
-  	var self = this;
-
+  	let self = this;
   	this.id = id;
     this.name = name || 'No name given';
 
@@ -17,7 +16,7 @@ function Card(id, name) {
 }
 Card.prototype = {
 	removeCard: function() {
-        var self = this;
+        let self = this;
         
         fetch(baseUrl + '/card/' + self.id, { method: 'DELETE', headers: myHeaders })
         .then(function(resp) {

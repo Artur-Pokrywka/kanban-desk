@@ -1,13 +1,11 @@
 function Column(id, name) {
-    var self = this;
-
+    let self = this;
     this.id = id;
     this.name = name || 'No name given';
-
     this.element = generateTemplate('column-template', { name: this.name, id: this.id });
 
     if (event.target.classList.contains('add-card')) {
-        var cardName = prompt("Enter the name of the card");
+        const cardName = prompt("Enter the name of the card");
         event.preventDefault();
 
         fetch(baseUrl + '/card', {
@@ -15,15 +13,13 @@ function Column(id, name) {
             headers: myHeaders,
             body: data,
         })
-        .then(function(res) {
-            return res.json();
+        .then(function(resp) {
+            return resp.json();
         })
         .then(function() {
-            var card = new Card(resp.id, cardName);
+            let card = new Card(resp.id, cardName);
             self.addCard(card);
         });
-
-        // self.addCard(new Card(cardName));
     }
 }
 
@@ -32,7 +28,7 @@ Column.prototype = {
     this.element.querySelector('ul').appendChild(card.element);
   },
   removeColumn: function() {
-    var self = this;
+    let self = this;
     fetch(baseUrl + '/column/' + self.id, { method: 'DELETE', headers: myHeaders })
         .then(function(resp) {
         return resp.json();
