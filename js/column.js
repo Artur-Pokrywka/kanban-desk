@@ -26,15 +26,18 @@ function Column(id, name) {
                 let card = new Card(resp.id, cardName);
                 self.addCard(card);
             });
-        }
+        } else if (event.target.classList.contains('btn-delete')) {
+                self.removeColumn();
+            }
     })     
 };
 
 Column.prototype = {
-  addCard: function(card) {
+    addCard: function(card) {
     this.element.querySelector('ul').appendChild(card.element);
   },
   
+
   removeColumn: function() {
     let self = this;
     fetch(baseUrl + '/column/' + self.id, { method: 'DELETE', headers: myHeaders })
