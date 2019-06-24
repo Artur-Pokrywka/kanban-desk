@@ -7,10 +7,17 @@ function Column(id, name) {
 
     this.element.querySelector('.column').addEventListener('click', function (event){
         if (event.target.classList.contains('add-card')) {
-            const cardName = prompt("Enter the name of the card");
+            let cardName = prompt("Enter the name of the card");
             event.preventDefault();
+            
+            if (cardName === null) return;
+
+            if (!cardName) {
+                cardName = 'no name';
+            };
 
             let data = new FormData();
+            let error;
             data.append('name', cardName);
             data.append('bootcamp_kanban_column_id', self.id);
 
@@ -20,12 +27,18 @@ function Column(id, name) {
                 body: data,
             })
             .then(function(resp) {
+                error = !resp.ok;
                 return resp.json();
             })
             .then(function(resp) {
+                if (error) {
+                    console.log('err', resp.message);
+                    return;
+                }
                 let card = new Card(resp.id, cardName);
                 self.addCard(card);
             });
+
         } else if (event.target.classList.contains('btn-delete')) {
                 self.removeColumn();
             }
